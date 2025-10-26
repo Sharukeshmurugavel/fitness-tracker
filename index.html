@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fitness Tracker Pro — Final Year Project</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Fitness Tracker Pro</h1>
+    <nav>
+      <button data-section="overview" class="nav-btn active">Overview</button>
+      <button data-section="add" class="nav-btn">Add Activity</button>
+      <button data-section="calendar" class="nav-btn">Calendar</button>
+      <button data-section="history" class="nav-btn">History</button>
+      <button data-section="settings" class="nav-btn">Settings</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- OVERVIEW -->
+    <section id="overview" class="section active">
+      <div class="top-row">
+        <div class="cards">
+          <div class="card">
+            <h3>Total Steps</h3>
+            <p id="totalSteps">0</p>
+          </div>
+          <div class="card">
+            <h3>Total Calories</h3>
+            <p id="totalCalories">0</p>
+          </div>
+          <div class="card">
+            <h3>Avg Heart Rate</h3>
+            <p id="avgHR">--</p>
+          </div>
+          <div class="card">
+            <h3>Total Active Minutes</h3>
+            <p id="totalDuration">0</p>
+          </div>
+        </div>
+
+        <div class="mini-actions">
+          <button id="btnSample">Generate Sample Data</button>
+          <button id="btnExportJSON">Export JSON</button>
+          <button id="btnExportCSV">Export CSV</button>
+          <button id="btnImport">Import JSON</button>
+          <input id="fileInput" type="file" accept="application/json" style="display:none;">
+        </div>
+      </div>
+
+      <section class="charts">
+        <div class="chart-card">
+          <h4>Stacked: Activity Duration per Day (min)</h4>
+          <canvas id="stackedChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h4>Steps & Calories Trend</h4>
+          <canvas id="trendChart"></canvas>
+        </div>
+      </section>
+
+      <section class="badges">
+        <h4>Achievements</h4>
+        <div id="badgesContainer" class="badges-grid"></div>
+      </section>
+    </section>
+
+    <!-- ADD ACTIVITY -->
+    <section id="add" class="section">
+      <h2>Add Activity</h2>
+      <div class="add-grid">
+        <div class="form">
+          <label>Date</label>
+          <input type="date" id="activityDate">
+
+          <label>Activity</label>
+          <select id="activityType">
+            <option value="">-- select --</option>
+            <option value="walking">Walking</option>
+            <option value="jogging">Jogging</option>
+            <option value="cycling">Cycling</option>
+            <option value="swimming">Swimming</option>
+          </select>
+
+          <div id="dynamicInputs"></div>
+
+          <label>Notes (optional)</label>
+          <input type="text" id="notes" placeholder="e.g., morning walk">
+
+          <div class="row">
+            <button id="btnAdd">Add Activity</button>
+            <button id="btnAddAuto">Add (Auto estimate)</button>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <h4>Activity Formulas</h4>
+          <ul>
+            <li>Walking: steps = duration * 100, distance ≈ steps * 0.0008 km</li>
+            <li>Jogging: steps = duration * 150, distance ≈ steps * 0.001 km</li>
+            <li>Cycling: distance ≈ duration * 0.3 km</li>
+            <li>Calories (MET-based): calories = MET * weightKg * (duration / 60)</li>
+            <li>Heart Rate estimate uses age-based max HR and intensity factor</li>
+          </ul>
+          <p>Tip: fill duration only and click "Add (Auto estimate)".</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section id="calendar" class="section">
+      <h2>Calendar</h2>
+      <div class="calendar-controls">
+        <button id="prevMonth">&lt;</button>
+        <h3 id="calendarTitle"></h3>
+        <button id="nextMonth">&gt;</button>
+      </div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+      <div id="dayDetails" class="day-details"></div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="history" class="section">
+      <h2>Activity Log</h2>
+      <div id="logContainer"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="section">
+      <h2>Settings & Profile</h2>
+      <div class="settings-grid">
+        <div class="profile">
+          <label>Name</label>
+          <input id="profileName" type="text" placeholder="Your name">
+          <label>Age</label>
+          <input id="profileAge" type="number" min="10" max="120">
+          <label>Weight (kg)</label>
+          <input id="profileWeight" type="number" min="30" max="300">
+          <label>Resting HR (bpm)</label>
+          <input id="profileRestHR" type="number" min="40" max="100">
+          <div class="row">
+            <button id="saveProfile">Save Profile</button>
+            <button id="clearAll">Clear All Data</button>
+          </div>
+        </div>
+
+        <div class="goals">
+          <h4>Goals</h4>
+          <label>Daily Steps Goal</label>
+          <input id="goalSteps" type="number" min="1000" value="10000">
+          <label>Daily Calories Goal</label>
+          <input id="goalCalories" type="number" min="100" value="500">
+          <label>Daily Active Minutes Goal</label>
+          <input id="goalDuration" type="number" min="10" value="30">
+          <div class="row">
+            <button id="saveGoals">Save Goals</button>
+            <button id="testNotif">Request Notification Permission</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <small>Fitness Tracker Pro — Final Year Project Demo</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
