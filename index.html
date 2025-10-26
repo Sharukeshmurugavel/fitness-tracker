@@ -43,11 +43,9 @@
         </div>
 
         <div class="mini-actions">
-          <button id="btnSample">Generate Sample Data</button>
-          <button id="btnExportJSON">Export JSON</button>
           <button id="btnExportCSV">Export CSV</button>
-          <button id="btnImport">Import JSON</button>
-          <input id="fileInput" type="file" accept="application/json" style="display:none;">
+          <button id="btnImportCSV">Import CSV</button>
+          <input id="fileInput" type="file" accept=".csv" style="display:none;">
         </div>
       </div>
 
@@ -92,7 +90,6 @@
 
           <div class="row">
             <button id="btnAdd">Add Activity</button>
-            <button id="btnAddAuto">Add (Auto estimate)</button>
           </div>
         </div>
 
@@ -105,7 +102,7 @@
             <li>Calories (MET-based): calories = MET * weightKg * (duration / 60)</li>
             <li>Heart Rate estimate uses age-based max HR and intensity factor</li>
           </ul>
-          <p>Tip: fill duration only and click "Add (Auto estimate)".</p>
+          <p>Tip: fill steps/duration/distance as needed before adding activity.</p>
         </div>
       </div>
     </section>
@@ -157,7 +154,6 @@
           <input id="goalDuration" type="number" min="10" value="30">
           <div class="row">
             <button id="saveGoals">Save Goals</button>
-            <button id="testNotif">Request Notification Permission</button>
           </div>
         </div>
       </div>
